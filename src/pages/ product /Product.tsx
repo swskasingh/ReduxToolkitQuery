@@ -1,5 +1,5 @@
 import React from "react";
-import { useFetchProductsQuery } from "src/service/ product /api.ts"; // Adjust the import path
+import { useFetchProductsQuery } from "../../service/ product /api.ts"; // Adjust the import path
 import CardComponent from "../../components/card"; // Adjust the import path and component casing
 import { api } from "../../service/ product /api";
 
