@@ -1,27 +1,38 @@
-// components/CardComponent.tsx
-import React from "react";
-
-interface Product {
-  id: number;
-  title: string;
-  image: string;
-  description: string;
-  price: number;
-}
-
 interface CardProps {
-  product: Product;
+  id?: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating?: {
+    rate: number;
+    count: number;
+  };
 }
 
-const CardComponent: React.FC<CardProps> = ({ product }) => {
+const Card: React.FC<CardProps> = ({
+  image,
+  title,
+  description,
+  category,
+  price,
+}) => {
   return (
-    <div className="card">
-      <img src={product.image} alt={product.title} />
-      <h2>{product.title}</h2>
-      <p>{product.description}</p>
-      <span>${product.price}</span>
+    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+      <figure>
+        <img src={image} alt={category} />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">{title}</h2>
+        <p>{description}</p>
+        <p>{price}</p>
+        <div className="card-actions justify-end">
+          <button className="btn btn-primary">Product Page</button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default CardComponent;
+export default Card;

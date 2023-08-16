@@ -1,24 +1,38 @@
-import React from "react";
-import { useFetchProductsQuery } from "../../service/ product /api.ts"; // Adjust the import path
-import CardComponent from "../../components/card"; // Adjust the import path and component casing
-import { api } from "../../service/ product /api";
+import { Key } from "react";
+import Card from "../../components/card";
+import { useGetAllProductsQuery } from "../../service/product";
 
-const ProductPage: React.FC = () => {
-  const { data: products, error, isLoading } = useFetchProductsQuery({});
+interface IProduct {
+  price: number;
+  category: string;
+  description: string;
+  title: string;
+  image: string;
+  id: Key | null | undefined;
+  // Define your product interface here
+}
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message || "An error occurred"}</div>;
+const Product = () => {
+  const { data } = useGetAllProductsQuery();
+  if (!data) {
+    return null; // Handle loading or empty state
   }
 
   return (
-    <div className="product-page">
-      {products.map((product) => (
-        <CardComponent key={product.id} product={product} />
+    <div className="grid grid-cols-3">
+      {data.products.map((product: IProduct) => (
+        <div key={product.id}>
+          <Card
+            image={product.image}
+            title={product.title}
+            description={product.description}
+            category={product.category}
+            price={product.price}
+          />
+        </div>
       ))}
     </div>
   );
 };
+
+export default Product;
