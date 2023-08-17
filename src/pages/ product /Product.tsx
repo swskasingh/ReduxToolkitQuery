@@ -20,7 +20,7 @@ const Product = () => {
 
   return (
     <div className="grid grid-cols-3">
-      {data.products.map((product: IProduct) => (
+      {data?.map((product: IProduct) => (
         <div key={product.id}>
           <Card
             image={product.image}
